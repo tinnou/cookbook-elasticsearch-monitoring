@@ -29,7 +29,7 @@
 # Cluster name identifies your cluster for auto-discovery. If you're running
 # multiple clusters on the same network, make sure you're using unique names.
 #
-cluster.name: <%=  node[:elasticsearch][:cluster][:name] %>
+cluster.name: <%=  node[:elasticsearch][:monitoring][:cluster][:name] %>
 
 
 #################################### Node #####################################
@@ -379,3 +379,6 @@ http.basic.enabled: <%= (!!node[:elasticsearch][:basic_auth]).to_s %>
 http.basic.user: "<%= node[:elasticsearch][:basic_auth][:user] %>"
 http.basic.password: "<%= node[:elasticsearch][:basic_auth][:password] %>"
 <% end -%>
+
+####### Prevent the nodes in the monitoring cluster from generating their own stats  ######
+marvel.agent.enabled: false

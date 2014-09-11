@@ -56,3 +56,9 @@ if !!node[:elasticsearch][:basic_auth]
     not_if "ls #{node[:elasticsearch][:path][:plugins]}/http-basic"
   end
 end
+
+# install monitoring
+execute "install-marvel" do
+  command "#{node.elasticsearch[:home_dir]}bin/plugin -i elasticsearch/marvel/latest"
+  action :run
+end
