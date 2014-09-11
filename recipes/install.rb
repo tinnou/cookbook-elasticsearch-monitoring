@@ -59,6 +59,6 @@ end
 
 # install monitoring
 execute "install-marvel" do
-  command "#{node.elasticsearch[:home_dir]}bin/plugin -i elasticsearch/marvel/latest"
+  command "#{node.elasticsearch[:home_dir]}/bin/plugin -i elasticsearch/marvel/latest"
   action :run
 end
