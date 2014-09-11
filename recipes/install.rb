@@ -57,13 +57,14 @@ if !!node[:elasticsearch][:basic_auth]
   end
 end
 
-Chef::Log.info "Antoine: Ruby version: #{RUBY_VERSION}"
+Chef::Log.warn "Antoine: Ruby version: #{RUBY_VERSION}"
 
-
-# install monitoring
-if !File.directory?("#{node.elasticsearch[:home_dir]}/plugins/marvel")
+if !!node[:elasticsearch][:monitoring]
+  # install monitoring
   execute "install-marvel" do
     command "#{node.elasticsearch[:home_dir]}/bin/plugin -i elasticsearch/marvel/latest"
+    user node[:elasticsearch][:user]
     action :run
+    not_if "ls #{node[:elasticsearch][:path][:plugins]}/marvel"
   end
 end
