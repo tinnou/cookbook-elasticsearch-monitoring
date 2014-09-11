@@ -57,10 +57,8 @@ if !!node[:elasticsearch][:basic_auth]
   end
 end
 
-puts "Antoine Ruby version: #{RUBY_VERSION}"
-
 # install monitoring
-unless File.exists? "#{node.elasticsearch[:home_dir]}/plugins/marvel"
+unless Dir.exists? "#{node.elasticsearch[:home_dir]}/plugins/marvel"
   execute "install-marvel" do
     command "#{node.elasticsearch[:home_dir]}/bin/plugin -i elasticsearch/marvel/latest"
     action :run
